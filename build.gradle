@@ -1,0 +1,15 @@
+plugins {
+	id 'java'
+	id 'application'
+}
+
+mainClassName = "Main"
+
+repositories {
+	jcenter()
+}
+
+dependencies {
+	compile 'org.mariadb.jdbc:mariadb-java-client:2.2.3'
+    	testCompile 'junit:junit:4.12'
+}
