@@ -14,7 +14,9 @@ public class DbFacade implements AutoCloseable {
 
         System.out.println("Connection opened.");
     }
-
+    
+    
+/*
     public void printEmployees() throws SQLException {
         String sql = "SELECT * FROM employee";
         Statement stmt = conn.createStatement();
@@ -24,7 +26,7 @@ public class DbFacade implements AutoCloseable {
                     rset.getString(1), rset.getString(3));
         }
     }
-
+*/
     @Override
     public void close() throws SQLException {
         if( conn != null )
@@ -33,5 +35,91 @@ public class DbFacade implements AutoCloseable {
 
         System.out.println("Connection closed.");
 
+    }
+    
+    public ResultSet accountCreation(String username, String password, String email) {
+		ResultSet rset = null;
+		String sql = null;
+
+		try {
+			// create a Statement and an SQL string for the statement
+
+			sql = "INSERT INTO user VALUES(?, ?, ?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			pstmt.clearParameters();
+			pstmt.setString(1, username); // set the 1 parameter
+			pstmt.setString(2, password); // set the 2 parameter
+			pstmt.setString(3, email); // set the 3 parameter
+
+			rset = pstmt.executeQuery();
+		} catch (SQLException e) {
+			System.out.println("accountCreation failed: " + e.getMessage());
+		}
+
+		return rset;
+	}
+
+	public ResultSet grantAdministrator(String username) {
+		ResultSet rset = null;
+		String sql = null;
+
+		try {
+			// create a Statement and an SQL string for the statement
+
+			sql = "INSERT INTO administator VALUES(?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			pstmt.clearParameters();
+			pstmt.setString(1, username); // set the 1 parameter
+
+			rset = pstmt.executeQuery();
+		} catch (SQLException e) {
+			System.out.println("grantAdministrator failed: " + e.getMessage());
+		}
+
+		return rset;
+	}
+
+	public ResultSet grantCritic(String username) {
+		ResultSet rset = null;
+		String sql = null;
+
+		try {
+			// create a Statement and an SQL string for the statement
+
+			sql = "INSERT INTO critic VALUES(?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			pstmt.clearParameters();
+			pstmt.setString(1, username); // set the 1 parameter
+
+			rset = pstmt.executeQuery();
+		} catch (SQLException e) {
+			System.out.println("grantCritic failed: " + e.getMessage());
+		}
+
+		return rset;
+	}
+
+	public ResultSet addComment(String content) {
+        ResultSet rset = null;
+        String sql = null;
+
+        try {
+            // create a Statement and an SQL string for the statement
+
+            sql = "INSERT INTO comment VALUES(comment_id, ?, false, review, post_date, user)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.clearParameters();
+            pstmt.setString(1, content); // set the 1 parameter
+
+            rset = pstmt.executeQuery();
+        } catch (SQLException e) {
+            System.out.println("addComment failed: " + e.getMessage());
+        }
+
+        return rset;
     }
 }
