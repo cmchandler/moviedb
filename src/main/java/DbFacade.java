@@ -122,4 +122,91 @@ public class DbFacade implements AutoCloseable {
 
         return rset;
     }
+	
+	public ResultSet deleteComment(String comment_id) {
+        ResultSet rset = null;
+        String sql = null;
+
+        try {
+            // create a Statement and an SQL string for the statement
+
+            sql = "DELETE comment_id FROM comment WHERE comment_id=?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.clearParameters();
+            pstmt.setString(1, comment_id); // set the 1 parameter
+
+            rset = pstmt.executeQuery();
+        } catch (SQLException e) {
+            System.out.println("deleteComment failed: " + e.getMessage());
+        }
+
+        return rset;
+    }
+
+    // NOT SURE HOW TO DO IMAGE, have it as a string thats a link maybe?
+    public ResultSet postReview(String movie, String image, String rating) {
+        ResultSet rset = null;
+        String sql = null;
+
+        try {
+            // create a Statement and an SQL string for the statement
+
+            sql = "INSERT INTO review VALUES(review_id, ?, ?, ?, post_date, critic)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.clearParameters();
+            pstmt.setString(1, movie); // set the 1 parameter
+            pstmt.setString(1, image); // set the 2 parameter
+            pstmt.setString(1, rating); // set the 3 parameter
+
+            rset = pstmt.executeQuery();
+        } catch (SQLException e) {
+            System.out.println("postReview failed: " + e.getMessage());
+        }
+
+        return rset;
+    }
+
+    public ResultSet listMovieReviews(String movie) {
+        ResultSet rset = null;
+        String sql = null;
+
+        try {
+            // create a Statement and an SQL string for the statement
+
+            sql = "SELECT post_date, movie, rating FROM movie WHERE movie=?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.clearParameters();
+            pstmt.setString(1, movie); // set the 1 parameter
+
+            rset = pstmt.executeQuery();
+        } catch (SQLException e) {
+            System.out.println("listMovieReview failed: " + e.getMessage());
+        }
+
+        return rset;
+    }
+
+    public ResultSet deleteUser(String username) {
+        ResultSet rset = null;
+        String sql = null;
+
+        try {
+            // create a Statement and an SQL string for the statement
+
+            sql = "DELETE username FROM user WHERE username=?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.clearParameters();
+            pstmt.setString(1, username); // set the 1 parameter
+
+            rset = pstmt.executeQuery();
+        } catch (SQLException e) {
+            System.out.println("deleteUser failed: " + e.getMessage());
+        }
+
+        return rset;
+    }
 }
