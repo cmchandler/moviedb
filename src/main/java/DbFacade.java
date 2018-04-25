@@ -50,7 +50,7 @@ public class DbFacade implements AutoCloseable {
      * @param username The desired username for the new user
      * @param password The desired password for the new user
      * @param email The user's email address
-     * @return ResultSet containing the
+     * @return ResultSet containing the created row
      */
     public ResultSet accountCreation(String username, String password, String email) {
 		ResultSet rset = null;
@@ -78,7 +78,7 @@ public class DbFacade implements AutoCloseable {
     /**
      * Adds administrator permissions to an account.
      * @param username The username associated with the account to grant Administrator
-     * @return ResultSet containing
+     * @return ResultSet containing the modified row
      */
 	public ResultSet grantAdministrator(String username) {
 		ResultSet rset = null;
@@ -104,7 +104,7 @@ public class DbFacade implements AutoCloseable {
     /**
      * Adds Critic permissions to an account.
      * @param username The username associated with the account to grant Critic
-     * @return
+     * @return the modified row
      */
 	public ResultSet grantCritic(String username) {
 		ResultSet rset = null;
@@ -130,7 +130,7 @@ public class DbFacade implements AutoCloseable {
     /**
      * Adds a comment.
      * @param content The comment to add.
-     * @return
+     * @return the row containing the added comment.
      */
 	public ResultSet addComment(String content) {
         ResultSet rset = null;
@@ -154,9 +154,9 @@ public class DbFacade implements AutoCloseable {
     }
 
     /**
-     * Deletes a comment with the provided comment ID
+     * Deletes a comment with the provided comment ID.
      * @param comment_id the id of the comment to delete
-     * @return
+     * @return the deleted row.
      */
 	public ResultSet deleteComment(String comment_id) {
         ResultSet rset = null;
@@ -181,12 +181,21 @@ public class DbFacade implements AutoCloseable {
 
     /**
      * Adds a new review to the database, taking information from user.
+     *
+     * Image is currently in database as a BLOB, but the intent is to
+     * store the name of the image file, kept outside the database on the
+     * server.
+     *
+     * Image filename format: XXXXXX_YYYYYYYYYYYYYYYY
+     *
+     * Where XXXX = username
+     *       YYYYYYYYYYYYYY = hash of the image data from hashImage()
+     *
      * @param movie The name of the movie the review is about
      * @param image An image associated with the movie
      * @param rating The rating of the movie given by the reviewer
-     * @return
+     * @return the created review row
      */
-    // NOT SURE HOW TO DO IMAGE, have it as a string thats a link maybe?
     public ResultSet postReview(String movie, String image, String rating) {
         ResultSet rset = null;
         String sql = null;
@@ -240,7 +249,7 @@ public class DbFacade implements AutoCloseable {
     /**
      * Deletes a user with given username from the database.
      * @param username the username of the user to delete.
-     * @return
+     * @return a row containing the deleted user
      */
     public ResultSet deleteUser(String username) {
         ResultSet rset = null;
