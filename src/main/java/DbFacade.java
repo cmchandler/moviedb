@@ -232,13 +232,15 @@ public class DbFacade implements AutoCloseable {
         try {
             // create a Statement and an SQL string for the statement
 
-            sql = "SELECT post_date, movie, rating FROM movie WHERE movie=?";
+            sql = "SELECT post_date, movie, rating FROM review WHERE movie = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.clearParameters();
+
             pstmt.setString(1, movie); // set the 1 parameter
 
             rset = pstmt.executeQuery();
+
         } catch (SQLException e) {
             System.out.println("listMovieReview failed: " + e.getMessage());
         }
