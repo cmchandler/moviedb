@@ -6,20 +6,6 @@ import java.util.*;
 
 public class DbFacadeTest {
 
-	@Test 
-	public void testOpenClose() throws SQLException {
-
-		// This will open and close the connection.  It will be opened by the constructor,
-		// and the close() method will automatically be called when exiting the try block.
-		try( DbFacade db = new DbFacade() ) {
-
-		}
-		
-	}
-	
-	/*
-	CODE FOR PROJECT GOES HERE
-	*/
 	@Test
 	public void testAccountCreation() throws SQLException {
 		ArrayList<String> username = new ArrayList<>(Arrays.asList("user1"));
