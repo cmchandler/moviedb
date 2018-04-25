@@ -4,21 +4,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import java.util.*;
 
-public class DbFacadeTest implements DbFacade {
-
-
-
-	/*
-	 * CODE FOR THE PROJECT GOES HERE
-	 */
-
-
-
-
-	/*
-	EVERYTHING AFTER THIS POINT IS JUST EXAMPLES OF HOW TO DO STUFF
-	 */
-
+public class DbFacadeTest {
 
 	@Test 
 	public void testOpenClose() throws SQLException {
@@ -30,6 +16,16 @@ public class DbFacadeTest implements DbFacade {
 		}
 		
 	}
+	
+	/*
+	CODE FOR PROJECT GOES HERE
+	*/
+	
+	
+	
+	/*
+	EVERYTHING BELOW THIS IS EXAMPLES
+	*/
 
 	@Test 
 	public void testGetNameSalaryResearch() throws SQLException {
