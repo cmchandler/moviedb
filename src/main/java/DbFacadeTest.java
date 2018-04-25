@@ -20,7 +20,32 @@ public class DbFacadeTest {
 	/*
 	CODE FOR PROJECT GOES HERE
 	*/
-	
+	@Test
+	public void testAccountCreation() throws SQLException {
+		ArrayList<String> username = new ArrayList<>(Arrays.asList("user1"));
+		ArrayList<String> password = new ArrayList<>(Arrays.asList( "password1" ));
+		ArrayList<String> email = new ArrayList<>(Arrays.asList( "test@whatever.com" ));
+
+		try( DbFacade db = new DbFacade() ) {
+			ResultSet rset = db.accountCreation("user1", "password1", "test@whatever.com");
+
+			// Use a loop to read all rows
+			List<String> actualUsername = new ArrayList<>();
+			List<String> actualPassword = new ArrayList<>();
+			List<String> actualEmail = new ArrayList<>();
+			while( rset.next() ) {
+				actualUsername.add(rset.getString(1) );
+				actualPassword.add(rset.getString(2) );
+				actualEmail.add(rset.getString(3) );
+			}
+
+			// Compare the lists to the expected results
+			assertTrue(actualUsername.contains(username.get(0)));
+			assertTrue(actualPassword.contains(password.get(0)));
+			assertTrue(actualEmail.contains(email.get(0)));
+
+		}
+	}
 	
 	
 	/*
