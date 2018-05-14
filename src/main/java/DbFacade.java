@@ -291,10 +291,8 @@ public class DbFacade implements AutoCloseable {
 	}
 
     /**
-     * Gets a ResultSet containing all of the movie reviews related to a movie with
-     * a provided title.
-     * @param movie The name of the movie to search for reviews for
-     * @return ResultSet containing all of the associated rows with the title
+     * Gets a ResultSet containing information about all of the movie reviews
+     * @return ResultSet containing postDate, movie name, rating, and critic from all reviews
      */
     public ResultSet listAllMovieReviews() {
         ResultSet rset = null;
@@ -307,8 +305,6 @@ public class DbFacade implements AutoCloseable {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.clearParameters();
-
-           // pstmt.setString(1, movie); // set the 1 parameter
 
             rset = pstmt.executeQuery();
 

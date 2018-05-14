@@ -200,7 +200,7 @@ public class ExampleController {
 
             while (rset.next()) {
                 Map<String, String> row = new HashMap<>();
-                row.put("postDate", rset.getString(1));
+                row.put("post_date", rset.getString(1));
                 row.put("movie", rset.getString(2));
                 row.put("rating", rset.getString(3));
                 row.put("critic", rset.getString(4));
@@ -212,6 +212,37 @@ public class ExampleController {
 
         } catch (SQLException e) {
             System.err.println("Error in getMovieReviews: " + e.getMessage());
+
+            resp.status(500);
+            return "";
+        }
+
+
+    }
+
+    public Object searchMovie(Request req, Response resp) {
+        String movie = req.queryParams("movie");
+
+        try (DbFacade db = new DbFacade()) {
+            Map<String, Object> templateData = new HashMap<>();
+            ResultSet rset = db.listMovieReviews(movie);
+
+            ArrayList<Map<String, String>> movies = new ArrayList<>();
+
+            while (rset.next()) {
+                Map<String, String> row = new HashMap<>();
+                row.put("post_date", rset.getString(1));
+                row.put("movie", rset.getString(2));
+                row.put("rating", rset.getString(3));
+                row.put("critic", rset.getString(4));
+                movies.add(row);
+            }
+
+            templateData.put("movies", movies);
+            return Main.renderTemplate(templateData, "movieReviews.hbs");
+
+        } catch (SQLException e) {
+            System.err.println("Error in searchMovie: " + e.getMessage());
 
             resp.status(500);
             return "";

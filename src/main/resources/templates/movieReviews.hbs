@@ -2,10 +2,22 @@
 
 <h1>List of all movie reviews: </h1>
 
-<ul>
+<table>
+    <tr>
+        <th>Time Stamp</th>
+        <th>Movie Name</th>
+        <th>Rating</th>
+        <th>Critic's Username</th>
+    </tr>
     {{#movies}}
-        <li>{{postDate}} {{movieName}} {{rating}} {{critic}}</li>
+        <tr>
+            <th>{{post_date}}</th>
+            <th>{{movie}} </th>
+            <th>{{rating}}</th>
+            <th>{{critic}}</th>
+        </tr>
+
     {{/movies}}
-</ul>
+</table>
 
 {{footer}}
