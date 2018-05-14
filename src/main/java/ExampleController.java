@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static spark.Spark.halt;
+import static spark.Spark.webSocket;
 
 public class ExampleController {
 
@@ -114,7 +115,7 @@ public class ExampleController {
 
     public void criticBefore(Request req, Response resp) {
         String uname = req.session().attribute("username");
-        if( uname == null || !uname.equals("critic")) { // CHANGE THIS TO HAVE ALL CRITICS
+        if( uname == null || !uname.equals("critic") || !uname.equals("admin")) { // CHANGE THIS TO HAVE ALL CRITICS AND ADMINS
             halt(401, "Access denied");
         }
     }
@@ -168,7 +169,16 @@ public class ExampleController {
             Map<String, Object> templateData = new HashMap<>();
             ResultSet rset = db.allMovies();
 
-            //Array<Map<String, String>> movie
+            ArrayList<Map<String, String>> movies = new ArrayList<>();
+
+            while (rset.next()) {
+                Map<String, String> row = new HashMap<>();
+                row.put("movieName", rset.getString(1));
+                movies.add(row);
+            }
+
+            templateData.put("movies", movies);
+            return Main.renderTemplate(templateData, "movies.hbs");
 
         } catch (SQLException e) {
             System.err.println("Error in getMovies: " + e.getMessage());
@@ -177,6 +187,36 @@ public class ExampleController {
             return "";
         }
 
-        return Main.renderTemplate(null, "movies.hbs");
+
+    }
+
+    public Object getMovieReviews(Request req, Response resp) {
+
+        try (DbFacade db = new DbFacade()) {
+            Map<String, Object> templateData = new HashMap<>();
+            ResultSet rset = db.listAllMovieReviews();
+
+            ArrayList<Map<String, String>> movies = new ArrayList<>();
+
+            while (rset.next()) {
+                Map<String, String> row = new HashMap<>();
+                row.put("postDate", rset.getString(1));
+                row.put("movie", rset.getString(2));
+                row.put("rating", rset.getString(3));
+                row.put("critic", rset.getString(4));
+                movies.add(row);
+            }
+
+            templateData.put("movies", movies);
+            return Main.renderTemplate(templateData, "movieReviews.hbs");
+
+        } catch (SQLException e) {
+            System.err.println("Error in getMovieReviews: " + e.getMessage());
+
+            resp.status(500);
+            return "";
+        }
+
+
     }
 }

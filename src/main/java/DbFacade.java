@@ -274,7 +274,7 @@ public class DbFacade implements AutoCloseable {
 		try {
 			// create a Statement and an SQL string for the statement
 
-			sql = "SELECT post_date, movie, rating FROM review WHERE movie = ?";
+			sql = "SELECT post_date, movie, rating, critic FROM review WHERE movie = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
 			pstmt.clearParameters();
@@ -290,6 +290,35 @@ public class DbFacade implements AutoCloseable {
 		return rset;
 	}
 
+    /**
+     * Gets a ResultSet containing all of the movie reviews related to a movie with
+     * a provided title.
+     * @param movie The name of the movie to search for reviews for
+     * @return ResultSet containing all of the associated rows with the title
+     */
+    public ResultSet listAllMovieReviews() {
+        ResultSet rset = null;
+        String sql = null;
+
+        try {
+            // create a Statement and an SQL string for the statement
+
+            sql = "SELECT post_date, movie, rating, critic FROM review WHERE 1=1";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.clearParameters();
+
+           // pstmt.setString(1, movie); // set the 1 parameter
+
+            rset = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println("listMovieReview failed: " + e.getMessage());
+        }
+
+        return rset;
+    }
+
 	/**
 	 * Gets a ResultSet containing all of the movies in the database
 	 * @return ResultSet containing all of the movies in the database
@@ -299,13 +328,9 @@ public class DbFacade implements AutoCloseable {
 		String sql;
 		try {
 			// create a Statement and an SQL string for the statement
-
+            Statement stmt = conn.createStatement();
 			sql = "SELECT movie FROM review WHERE 1=1";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-
-			pstmt.clearParameters();
-
-			rset = pstmt.executeQuery();
+			rset = stmt.executeQuery(sql);
 
 		} catch (SQLException e) {
 			System.out.println("allMovies failed: " + e.getMessage());

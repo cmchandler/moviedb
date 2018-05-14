@@ -25,9 +25,11 @@ public class Main {
         get("/critic/newReview", controller::getNewReview);
         post("/critic/postNewReview", controller::postNewReview);
         get("/movies", controller::getMovies);
+        get("/movieReviews", controller::getMovieReviews);
 
         Spark.before("/user/*", controller::userBefore);
         Spark.before("/admin/*", controller::adminBefore);
+        Spark.before("/critic/*", controller::criticBefore);
 
     }
 
