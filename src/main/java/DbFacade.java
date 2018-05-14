@@ -68,7 +68,7 @@ public class DbFacade implements AutoCloseable {
 	public boolean authenticateUser( String username, String password ) throws SQLException {
 		String sql = "SELECT username FROM user WHERE " +
 				" username = ? AND " +
-				" password_hash = SHA2(?, 256)";
+				" password = SHA2(?, 256)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.clearParameters();
 		pstmt.setString(1, username);
