@@ -1041,8 +1041,7 @@ review</ColNames>
     </column>
     <column id="248" parent="212" name="password">
       <Position>2</Position>
-      <DataType>varchar(25)|0s</DataType>
-      <NotNull>1</NotNull>
+      <DataType>char(64)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="249" parent="212" name="email">

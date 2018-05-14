@@ -123,7 +123,7 @@ public class DbFacade implements AutoCloseable {
 		try {
 			// create a Statement and an SQL string for the statement
 
-			sql = "INSERT INTO administator VALUES(?)";
+			sql = "INSERT INTO administrator VALUES(?)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
 			pstmt.clearParameters();
@@ -201,7 +201,7 @@ public class DbFacade implements AutoCloseable {
 		try {
 			// create a Statement and an SQL string for the statement
 
-			sql = "DELETE comment_id FROM comment WHERE comment_id=?";
+			sql = "DELETE FROM comment WHERE comment_id=?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
 			pstmt.clearParameters();
@@ -319,25 +319,26 @@ public class DbFacade implements AutoCloseable {
 	 * @param username the username of the user to delete.
 	 * @return a row containing the deleted user
 	 */
-	public ResultSet deleteUser(String username) {
+	public int deleteUser(String username) {
 		ResultSet rset = null;
 		String sql = null;
+		int i = 0;
 
 		try {
 			// create a Statement and an SQL string for the statement
 
-			sql = "DELETE username FROM user WHERE username=?";
+			sql = "DELETE FROM user WHERE username=?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
 			pstmt.clearParameters();
 			pstmt.setString(1, username); // set the 1 parameter
 
-			rset = pstmt.executeQuery(); // should be executeUpdate??
+			 i  = pstmt.executeUpdate(); // should be executeUpdate??
 		} catch (SQLException e) {
 			System.out.println("deleteUser failed: " + e.getMessage());
 		}
 
-		return rset;
+		return i;
 	}
 
 	/**

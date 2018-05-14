@@ -179,4 +179,69 @@ public class ExampleController {
 
         return Main.renderTemplate(null, "movies.hbs");
     }
+
+    public Object grantAdmin(Request req, Response resp) {
+        String userToGrantAdmin = req.queryParams("uname");
+
+        try (DbFacade db = new DbFacade()) {
+
+            db.grantAdministrator(userToGrantAdmin);
+
+        } catch (SQLException e) {
+            System.err.println("Error in deleteComment: " + e.getMessage());
+
+            resp.status(500);
+            return "";
+        }
+
+        return Main.renderTemplate(null, "adminHome.hbs");
+    }
+
+    public Object deleteAccount(Request req, Response resp) {
+        String userToDelete = req.queryParams("uname");
+
+        try (DbFacade db = new DbFacade()) {
+
+            db.deleteUser(userToDelete);
+
+        } catch (SQLException e) {
+            System.err.println("Error in deleteComment: " + e.getMessage());
+
+            resp.status(500);
+            return "";
+        }
+        return Main.renderTemplate(null, "adminHome.hbs");
+    }
+
+    public Object deleteComment(Request req, Response resp) {
+        String commentToDelete = req.queryParams("postid");
+
+        try (DbFacade db = new DbFacade()) {
+
+            db.deleteComment(commentToDelete);
+
+        } catch (SQLException e) {
+            System.err.println("Error in deleteComment: " + e.getMessage());
+
+            resp.status(500);
+            return "";
+        }
+        return Main.renderTemplate(null, "adminHome.hbs");
+    }
+
+    public Object grantCritic(Request req, Response resp) {
+        String userToGrantCritic = req.queryParams("uname");
+
+        try (DbFacade db = new DbFacade()) {
+
+            db.grantCritic(userToGrantCritic);
+
+        } catch (SQLException e) {
+            System.err.println("Error in deleteComment: " + e.getMessage());
+
+            resp.status(500);
+            return "";
+        }
+        return Main.renderTemplate(null, "adminHome.hbs");
+    }
 }

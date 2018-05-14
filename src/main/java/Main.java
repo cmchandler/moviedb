@@ -26,8 +26,15 @@ public class Main {
         post("/critic/postNewReview", controller::postNewReview);
         get("/movies", controller::getMovies);
 
+        post("/admin/grantAdmin", controller::grantAdmin);
+        post("/admin/deleteAccount", controller::deleteAccount);
+        post("/admin/deleteComment", controller::deleteComment);
+        post("/admin/grantCritic", controller::grantCritic);
+
         Spark.before("/user/*", controller::userBefore);
         Spark.before("/admin/*", controller::adminBefore);
+
+
 
     }
 
