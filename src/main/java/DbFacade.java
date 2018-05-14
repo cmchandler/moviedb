@@ -90,7 +90,7 @@ public class DbFacade implements AutoCloseable {
 		try {
 			// create a Statement and an SQL string for the statement
 
-			sql = "INSERT INTO user VALUES(?, ?, ?)";
+			sql = "INSERT INTO user VALUES(?, SHA2(?, 256), ?)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
 			pstmt.clearParameters();
