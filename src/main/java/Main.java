@@ -21,6 +21,9 @@ public class Main {
         post("/signUpSuccess", controller::signUpSuccess);
         get("/user/home", controller::userHome);
         get("/admin/home", controller::adminHome);
+        get("/critic/home", controller::criticHome);
+        get("/critic/newReview", controller::getNewReview);
+        post("/critic/postNewReview", controller::postNewReview);
 
         Spark.before("/user/*", controller::userBefore);
         Spark.before("/admin/*", controller::adminBefore);

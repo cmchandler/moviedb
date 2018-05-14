@@ -1,7 +1,16 @@
 import spark.Request;
 import spark.Response;
 import spark.Session;
+import spark.utils.IOUtils;
 
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -81,5 +90,48 @@ public class ExampleController {
         if ( auth == null || (!auth)) {
             halt(401, "Access denied");
         }
+    }
+
+    public Object getNewReview(Request req, Response resp) {
+        return Main.renderTemplate(null, "new-review-form.hbs");
+    }
+
+    public Object postNewReview(Request req, Response resp) {
+
+        String movieName = req.queryParams("movieName");
+        String review = req.queryParams("review");
+        String rating = req.queryParams("rating");
+
+        try(DbFacade db = new DbFacade()) {
+            db.postReview(movieName, review, rating);
+
+        } catch(SQLException e) {
+            resp.status(500);
+            System.err.println("postLoginForm: " + e.getMessage());
+            return "";
+        }
+
+        try {
+
+        req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/Users/christien"));
+        Part filePart = req.raw().getPart("myfile");
+
+        InputStream inputStream = filePart.getInputStream() ;
+
+            OutputStream outputStream = new FileOutputStream("/Users/christien" + filePart.getSubmittedFileName());
+            IOUtils.copy(inputStream, outputStream);
+            outputStream.close();
+
+        } catch (IOException e) {
+            System.out.println("IO Exception.");
+        } catch (ServletException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return Main.renderTemplate(null, "new-review-success.hbs");
+    }
+
+    public Object criticHome(Request req, Response resp) {
+        return Main.renderTemplate(null, "criticHome.hbs");
     }
 }

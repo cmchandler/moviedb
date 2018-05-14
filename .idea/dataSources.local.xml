@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="PLU Database" uuid="8c70eebc-b03e-4d69-bc8c-0bc74d3da23f">
+      <database-info product="MySQL" version="5.5.56-MariaDB" jdbc-version="4.2" driver-name="MariaDB connector/J" driver-version="2.2.1">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>cyan_2018</user-name>
+      <introspection-schemas>*:367_2018_cyan</introspection-schemas>
+    </data-source>
+  </component>
+</project>

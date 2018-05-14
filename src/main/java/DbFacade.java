@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.time.Instant;
+
+import static java.lang.Math.toIntExact;
 
 public class DbFacade implements AutoCloseable {
 
@@ -223,24 +226,30 @@ public class DbFacade implements AutoCloseable {
 	 *       YYYYYYYYYYYYYY = hash of the image data from hashImage()
 	 *
 	 * @param movie The name of the movie the review is about
-	 * @param image An image associated with the movie
+	 * @param review An image associated with the movie
 	 * @param rating The rating of the movie given by the reviewer
 	 * @return the created review row
 	 */
-	public ResultSet postReview(String movie, String image, String rating) {
+	public ResultSet postReview(String movie, String review, String rating) {
 		ResultSet rset = null;
 		String sql = null;
 
 		try {
 			// create a Statement and an SQL string for the statement
 
-			sql = "INSERT INTO review VALUES(review_id, ?, ?, ?, post_date, critic)";
+
+			sql = "INSERT INTO review VALUES(?, ?, ?, ?, post_date, critic)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
 			pstmt.clearParameters();
-			pstmt.setString(1, movie); // set the 1 parameter
-			pstmt.setString(1, image); // set the 2 parameter
-			pstmt.setString(1, rating); // set the 3 parameter
+			//Uses mseconds from epoch as reviewID
+			pstmt.setInt(1, toIntExact(Instant.now().toEpochMilli() ));
+			pstmt.setString(2, movie);
+			pstmt.setString(3, review);
+			pstmt.setString(4, rating);
+			//pstmt.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
+
+
 
 			rset = pstmt.executeQuery();
 		} catch (SQLException e) {
