@@ -18,12 +18,13 @@ public class Main {
         get("/login", controller::getLoginForm);
         post( "/authenticate", controller::postLoginForm);
         get("/signUp", controller::signUp);
-        post("/signUpSuccess", controller::signUpSuccess);
+        post("/postSignUp", controller::postSignUp);
         get("/user/home", controller::userHome);
         get("/admin/home", controller::adminHome);
         get("/critic/home", controller::criticHome);
         get("/critic/newReview", controller::getNewReview);
         post("/critic/postNewReview", controller::postNewReview);
+        get("/movies", controller::getMovies);
 
         Spark.before("/user/*", controller::userBefore);
         Spark.before("/admin/*", controller::adminBefore);

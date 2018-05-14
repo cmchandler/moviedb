@@ -68,7 +68,7 @@ public class DbFacade implements AutoCloseable {
 	public boolean authenticateUser( String username, String password ) throws SQLException {
 		String sql = "SELECT username FROM user WHERE " +
 				" username = ? AND " +
-				" password_hash = SHA2(?, 256)";
+				" password = SHA2(?, 256)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.clearParameters();
 		pstmt.setString(1, username);
@@ -86,9 +86,10 @@ public class DbFacade implements AutoCloseable {
 	 * @param email The user's email address
 	 * @return ResultSet containing the created row
 	 */
-	public ResultSet accountCreation(String username, String password, String email) {
+	public int accountCreation(String username, String password, String email) {
 		ResultSet rset = null;
 		String sql = null;
+		int success = 0;
 
 		try {
 			// create a Statement and an SQL string for the statement
@@ -101,12 +102,13 @@ public class DbFacade implements AutoCloseable {
 			pstmt.setString(2, password); // set the 2 parameter
 			pstmt.setString(3, email); // set the 3 parameter
 
-			rset = pstmt.executeQuery();
+			success = pstmt.executeUpdate();
+
 		} catch (SQLException e) {
 			System.out.println("accountCreation failed: " + e.getMessage());
 		}
 
-		return rset;
+		return success;
 	}
 
 	/**
@@ -127,7 +129,7 @@ public class DbFacade implements AutoCloseable {
 			pstmt.clearParameters();
 			pstmt.setString(1, username); // set the 1 parameter
 
-			rset = pstmt.executeQuery();
+			rset = pstmt.executeQuery(); // should be executeUpdate??
 		} catch (SQLException e) {
 			System.out.println("grantAdministrator failed: " + e.getMessage());
 		}
@@ -153,7 +155,7 @@ public class DbFacade implements AutoCloseable {
 			pstmt.clearParameters();
 			pstmt.setString(1, username); // set the 1 parameter
 
-			rset = pstmt.executeQuery();
+			rset = pstmt.executeQuery(); // should be executeUpdate??
 		} catch (SQLException e) {
 			System.out.println("grantCritic failed: " + e.getMessage());
 		}
@@ -179,7 +181,7 @@ public class DbFacade implements AutoCloseable {
 			pstmt.clearParameters();
 			pstmt.setString(1, content); // set the 1 parameter
 
-			rset = pstmt.executeQuery();
+			rset = pstmt.executeQuery(); // should be executeUpdate??
 		} catch (SQLException e) {
 			System.out.println("addComment failed: " + e.getMessage());
 		}
@@ -205,7 +207,7 @@ public class DbFacade implements AutoCloseable {
 			pstmt.clearParameters();
 			pstmt.setString(1, comment_id); // set the 1 parameter
 
-			rset = pstmt.executeQuery();
+			rset = pstmt.executeQuery(); // should be executeUpdate??
 		} catch (SQLException e) {
 			System.out.println("deleteComment failed: " + e.getMessage());
 		}
@@ -251,7 +253,7 @@ public class DbFacade implements AutoCloseable {
 
 
 
-			rset = pstmt.executeQuery();
+			rset = pstmt.executeQuery(); // should be executeUpdate??
 		} catch (SQLException e) {
 			System.out.println("postReview failed: " + e.getMessage());
 		}
@@ -289,6 +291,30 @@ public class DbFacade implements AutoCloseable {
 	}
 
 	/**
+	 * Gets a ResultSet containing all of the movies in the database
+	 * @return ResultSet containing all of the movies in the database
+	 */
+	public ResultSet allMovies() {
+		ResultSet rset = null;
+		String sql;
+		try {
+			// create a Statement and an SQL string for the statement
+
+			sql = "SELECT movie FROM review WHERE 1=1";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			pstmt.clearParameters();
+
+			rset = pstmt.executeQuery();
+
+		} catch (SQLException e) {
+			System.out.println("allMovies failed: " + e.getMessage());
+		}
+
+		return rset;
+	}
+
+	/**
 	 * Deletes a user with given username from the database.
 	 * @param username the username of the user to delete.
 	 * @return a row containing the deleted user
@@ -306,7 +332,7 @@ public class DbFacade implements AutoCloseable {
 			pstmt.clearParameters();
 			pstmt.setString(1, username); // set the 1 parameter
 
-			rset = pstmt.executeQuery();
+			rset = pstmt.executeQuery(); // should be executeUpdate??
 		} catch (SQLException e) {
 			System.out.println("deleteUser failed: " + e.getMessage());
 		}
