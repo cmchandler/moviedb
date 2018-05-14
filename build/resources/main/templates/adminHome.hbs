@@ -1,5 +1,22 @@
 {{header}}
 
-<h1>Welcome to the Admin home</h1>
+<h1>Administrator Menu</h1>
+
+<--Grant admin-->
+<form method="post" action="grantAdmin">
+    <p><label>Username:</label><input type="text" name="uname">
+        <button type="submit">Submit</button></p>
+</form>
+
+<form method="post" action="deleteAccount">
+    <p><label>Username:</label><input type="text" name="uname">
+        <button type="submit">Submit</button></p>
+</form>
+
+<form method="post" action="deletePost">
+    <p><label>Post ID:</label><input type="text" name="postid">
+        <button type="submit">Submit</button></p>
+</form>
+
 
 {{footer}}

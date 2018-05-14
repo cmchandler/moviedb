@@ -134,4 +134,5 @@ public class ExampleController {
     public Object criticHome(Request req, Response resp) {
         return Main.renderTemplate(null, "criticHome.hbs");
     }
+
 }
