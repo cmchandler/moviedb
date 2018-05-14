@@ -25,6 +25,7 @@ public class Main {
         get("/critic/newReview", controller::getNewReview);
         post("/critic/postNewReview", controller::postNewReview);
         get("/movies", controller::getMovies);
+        get("/movieReviews", controller::getMovieReviews);
 
         post("/admin/grantAdmin", controller::grantAdmin);
         post("/admin/deleteAccount", controller::deleteAccount);
@@ -33,6 +34,7 @@ public class Main {
 
         Spark.before("/user/*", controller::userBefore);
         Spark.before("/admin/*", controller::adminBefore);
+        Spark.before("/critic/*", controller::criticBefore);
 
 
 
