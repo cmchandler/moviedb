@@ -111,57 +111,57 @@ public class DbFacade implements AutoCloseable {
 		return success;
 	}
 
-	/**
-	 * Adds administrator permissions to an account.
-	 * @param username The username associated with the account to grant Administrator
-	 * @return ResultSet containing the modified row
-	 */
-	public ResultSet grantAdministrator(String username) {
-		ResultSet rset = null;
-		String sql = null;
+    /**
+     * Adds administrator permissions to an account.
+     * @param username The username associated with the account to grant Administrator
+     * @return ResultSet containing the modified row
+     */
+    public ResultSet grantAdministrator(String username) {
+        ResultSet rset = null;
+        String sql = null;
 
-		try {
-			// create a Statement and an SQL string for the statement
+        try {
+            // create a Statement and an SQL string for the statement
 
-			sql = "INSERT INTO administrator VALUES(?)";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+            sql = "INSERT INTO administrator VALUES(?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
 
-			pstmt.clearParameters();
-			pstmt.setString(1, username); // set the 1 parameter
+            pstmt.clearParameters();
+            pstmt.setString(1, username); // set the 1 parameter
 
-			rset = pstmt.executeQuery(); // should be executeUpdate??
-		} catch (SQLException e) {
-			System.out.println("grantAdministrator failed: " + e.getMessage());
-		}
+            rset = pstmt.executeQuery(); // should be executeUpdate??
+        } catch (SQLException e) {
+            System.out.println("grantAdministrator failed: " + e.getMessage());
+        }
 
-		return rset;
-	}
+        return rset;
+    }
 
-	/**
-	 * Adds Critic permissions to an account.
-	 * @param username The username associated with the account to grant Critic
-	 * @return the modified row
-	 */
-	public ResultSet grantCritic(String username) {
-		ResultSet rset = null;
-		String sql = null;
+    /**
+     * Adds Critic permissions to an account.
+     * @param username The username associated with the account to grant Critic
+     * @return the modified row
+     */
+    public ResultSet grantCritic(String username) {
+        ResultSet rset = null;
+        String sql = null;
 
-		try {
-			// create a Statement and an SQL string for the statement
+        try {
+            // create a Statement and an SQL string for the statement
 
-			sql = "INSERT INTO critic VALUES(?)";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+            sql = "INSERT INTO critic VALUES(?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
 
-			pstmt.clearParameters();
-			pstmt.setString(1, username); // set the 1 parameter
+            pstmt.clearParameters();
+            pstmt.setString(1, username); // set the 1 parameter
 
-			rset = pstmt.executeQuery(); // should be executeUpdate??
-		} catch (SQLException e) {
-			System.out.println("grantCritic failed: " + e.getMessage());
-		}
+            rset = pstmt.executeQuery(); // should be executeUpdate??
+        } catch (SQLException e) {
+            System.out.println("grantCritic failed: " + e.getMessage());
+        }
 
-		return rset;
-	}
+        return rset;
+    }
 
 	/**
 	 * Adds a comment.
@@ -192,31 +192,31 @@ public class DbFacade implements AutoCloseable {
 		return rset;
 	}
 
-	/**
-	 * Deletes a comment with the provided comment ID.
-	 * @param comment_id the id of the comment to delete
-	 * @return the deleted row.
-	 */
-	public ResultSet deleteComment(String comment_id) {
-		ResultSet rset = null;
-		String sql = null;
+    /**
+     * Deletes a comment with the provided comment ID.
+     * @param comment_id the id of the comment to delete
+     * @return the deleted row.
+     */
+    public ResultSet deleteComment(String comment_id) {
+        ResultSet rset = null;
+        String sql = null;
 
-		try {
-			// create a Statement and an SQL string for the statement
+        try {
+            // create a Statement and an SQL string for the statement
 
-			sql = "DELETE FROM comment WHERE comment_id=?";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+            sql = "DELETE FROM comment WHERE comment_id=?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
 
-			pstmt.clearParameters();
-			pstmt.setString(1, comment_id); // set the 1 parameter
+            pstmt.clearParameters();
+            pstmt.setString(1, comment_id); // set the 1 parameter
 
-			rset = pstmt.executeQuery(); // should be executeUpdate??
-		} catch (SQLException e) {
-			System.out.println("deleteComment failed: " + e.getMessage());
-		}
+            rset = pstmt.executeQuery(); // should be executeUpdate??
+        } catch (SQLException e) {
+            System.out.println("deleteComment failed: " + e.getMessage());
+        }
 
-		return rset;
-	}
+        return rset;
+    }
 
 	/**
 	 * Gets comments related to a movie
@@ -334,6 +334,7 @@ public class DbFacade implements AutoCloseable {
 
             pstmt.clearParameters();
 
+
             rset = pstmt.executeQuery();
 
         } catch (SQLException e) {
@@ -353,7 +354,8 @@ public class DbFacade implements AutoCloseable {
 		try {
 			// create a Statement and an SQL string for the statement
             Statement stmt = conn.createStatement();
-			sql = "SELECT movie FROM review WHERE 1=1";
+			sql = "SELECT post_date, movie, rating, critic FROM review WHERE review_id=?";
+
 			rset = stmt.executeQuery(sql);
 
 		} catch (SQLException e) {
@@ -363,32 +365,60 @@ public class DbFacade implements AutoCloseable {
 		return rset;
 	}
 
-	/**
-	 * Deletes a user with given username from the database.
-	 * @param username the username of the user to delete.
-	 * @return a row containing the deleted user
-	 */
-	public int deleteUser(String username) {
-		ResultSet rset = null;
-		String sql = null;
-		int i = 0;
+    /**
+     * Gets a ResultSet containing all of the movies in the database
+     * @return ResultSet containing all of the movies in the database
+     */
+    public ResultSet getReviewByID(String reviewID) {
+        ResultSet rset = null;
+        String sql;
+        try {
+            // create a Statement and an SQL string for the statement
+            Statement stmt = conn.createStatement();
+            sql = sql = "SELECT post_date, movie, rating, critic FROM review WHERE review_id=?";
 
-		try {
-			// create a Statement and an SQL string for the statement
+            PreparedStatement pstmt = conn.prepareStatement(sql);
 
-			sql = "DELETE FROM user WHERE username=?";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.clearParameters();
 
-			pstmt.clearParameters();
-			pstmt.setString(1, username); // set the 1 parameter
+            pstmt.setString(1, reviewID);
 
-			 i  = pstmt.executeUpdate(); // should be executeUpdate??
-		} catch (SQLException e) {
-			System.out.println("deleteUser failed: " + e.getMessage());
-		}
 
-		return i;
-	}
+            rset = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println("allMovies failed: " + e.getMessage());
+        }
+
+        return rset;
+    }
+
+    /**
+     * Deletes a user with given username from the database.
+     * @param username the username of the user to delete.
+     * @return a row containing the deleted user
+     */
+    public int deleteUser(String username) {
+        ResultSet rset = null;
+        String sql = null;
+        int i = 0;
+
+        try {
+            // create a Statement and an SQL string for the statement
+
+            sql = "DELETE FROM user WHERE username=?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.clearParameters();
+            pstmt.setString(1, username); // set the 1 parameter
+
+            i  = pstmt.executeUpdate(); // should be executeUpdate??
+        } catch (SQLException e) {
+            System.out.println("deleteUser failed: " + e.getMessage());
+        }
+
+        return i;
+    }
 
 	/**
 	 * Hashes an image to an MD5 hash.

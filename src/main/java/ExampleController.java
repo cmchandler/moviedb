@@ -163,6 +163,71 @@ public class ExampleController {
         return Main.renderTemplate(null, "criticHome.hbs");
     }
 
+    public Object grantAdmin(Request req, Response resp) {
+        String userToGrantAdmin = req.queryParams("uname");
+
+        try (DbFacade db = new DbFacade()) {
+
+            db.grantAdministrator(userToGrantAdmin);
+
+        } catch (SQLException e) {
+            System.err.println("Error in deleteComment: " + e.getMessage());
+
+            resp.status(500);
+            return "";
+        }
+
+        return Main.renderTemplate(null, "adminHome.hbs");
+    }
+
+    public Object deleteAccount(Request req, Response resp) {
+        String userToDelete = req.queryParams("uname");
+
+        try (DbFacade db = new DbFacade()) {
+
+            db.deleteUser(userToDelete);
+
+        } catch (SQLException e) {
+            System.err.println("Error in deleteComment: " + e.getMessage());
+
+            resp.status(500);
+            return "";
+        }
+        return Main.renderTemplate(null, "adminHome.hbs");
+    }
+
+    public Object deleteComment(Request req, Response resp) {
+        String commentToDelete = req.queryParams("postid");
+
+        try (DbFacade db = new DbFacade()) {
+
+            db.deleteComment(commentToDelete);
+
+        } catch (SQLException e) {
+            System.err.println("Error in deleteComment: " + e.getMessage());
+
+            resp.status(500);
+            return "";
+        }
+        return Main.renderTemplate(null, "adminHome.hbs");
+    }
+
+    public Object grantCritic(Request req, Response resp) {
+        String userToGrantCritic = req.queryParams("uname");
+
+        try (DbFacade db = new DbFacade()) {
+
+            db.grantCritic(userToGrantCritic);
+
+        } catch (SQLException e) {
+            System.err.println("Error in deleteComment: " + e.getMessage());
+
+            resp.status(500);
+            return "";
+        }
+        return Main.renderTemplate(null, "adminHome.hbs");
+    }
+
     public Object getMovies(Request req, Response resp) {
 
         try (DbFacade db = new DbFacade()) {
@@ -189,6 +254,7 @@ public class ExampleController {
 
 
     }
+
 
     public Object getMovieReviews(Request req, Response resp) {
 
@@ -247,6 +313,33 @@ public class ExampleController {
             resp.status(500);
             return "";
         }
+    }
+
+    public Object getReviewByID(Request req, Response resp) {
+        String reviewID = req.params(":reviewid");
+
+        try (DbFacade db = new DbFacade()) {
+            Map<String, Object> templateData = new HashMap<>();
+            ResultSet rset = db.getReviewByID(reviewID);
+
+            while( rset.next() ){
+
+                templateData.put("post_date", rset.getString(1));
+                templateData.put("movie", rset.getString(2));
+                templateData.put("rating", rset.getString(3));
+                templateData.put("critic", rset.getString(4));
+            }
+
+
+            return Main.renderTemplate(templateData, "movie-display.hbs");
+
+        } catch (SQLException e) {
+            System.err.println("Error in searchMovie: " + e.getMessage());
+
+            resp.status(500);
+            return "";
+        }
+
     }
 
     public Object getComments(Request req, Response resp) {
