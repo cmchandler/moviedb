@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0ec80e12-307c-4367-8354-8cd6bb41635f" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/addCommentSuccess.hbs" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" />
@@ -10,14 +9,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/DbFacade.class" afterPath="$PROJECT_DIR$/build/classes/java/main/DbFacade.class" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/ExampleController.class" afterPath="$PROJECT_DIR$/build/classes/java/main/ExampleController.class" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Main.class" afterPath="$PROJECT_DIR$/build/classes/java/main/Main.class" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/movieAndComments.hbs" afterPath="$PROJECT_DIR$/build/resources/main/templates/movieAndComments.hbs" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DbFacade.java" afterPath="$PROJECT_DIR$/src/main/java/DbFacade.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ExampleController.java" afterPath="$PROJECT_DIR$/src/main/java/ExampleController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/movieAndComments.hbs" afterPath="$PROJECT_DIR$/src/main/resources/templates/movieAndComments.hbs" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -127,8 +120,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="31" column="65" lean-forward="false" selection-start-line="31" selection-start-column="65" selection-end-line="31" selection-end-column="65" />
+            <state relative-caret-position="357">
+              <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -137,8 +130,8 @@
       <file leaf-file-name="DbFacade.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/DbFacade.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="186" column="65" lean-forward="false" selection-start-line="186" selection-start-column="65" selection-end-line="186" selection-end-column="65" />
+            <state relative-caret-position="773">
+              <caret line="391" column="0" lean-forward="true" selection-start-line="391" selection-start-column="0" selection-end-line="391" selection-end-column="0" />
               <folding>
                 <marker date="1526423994152" expanded="true" signature="1741:1833" ph=" SELECT statement" />
                 <marker date="1526423994152" expanded="true" signature="2594:2637" ph=" INSERT statement" />
@@ -161,8 +154,8 @@
       <file leaf-file-name="ExampleController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ExampleController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="316" column="5" lean-forward="true" selection-start-line="316" selection-start-column="5" selection-end-line="316" selection-end-column="5" />
+            <state relative-caret-position="275">
+              <caret line="303" column="0" lean-forward="true" selection-start-line="303" selection-start-column="0" selection-end-line="303" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#799#800#0" expanded="true" />
@@ -1201,28 +1194,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DbFacade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="186" column="65" lean-forward="false" selection-start-line="186" selection-start-column="65" selection-end-line="186" selection-end-column="65" />
-          <folding>
-            <marker date="1526423994152" expanded="true" signature="1741:1833" ph=" SELECT statement" />
-            <marker date="1526423994152" expanded="true" signature="2594:2637" ph=" INSERT statement" />
-            <marker date="1526423994152" expanded="true" signature="3430:3465" ph=" INSERT statement (ADMINISTRATOR)" />
-            <marker date="1526423994152" expanded="true" signature="4131:4159" ph=" INSERT statement (CRITIC)" />
-            <marker date="1526423994152" expanded="true" signature="4807:4826" ph=" INSERT statement" />
-            <marker date="1526423994152" expanded="true" signature="4807:4884" ph=" INSERT statement" />
-            <marker date="1526423994152" expanded="true" signature="5872:5910" ph=" DELETE statement" />
-            <marker date="1526423994152" expanded="true" signature="6555:6664" ph=" SELECT statement" />
-            <marker date="1526423994152" expanded="true" signature="7735:7791" ph=" INSERT statement (REVIEW)" />
-            <marker date="1526423994152" expanded="true" signature="8759:8837" ph=" SELECT statement (REVIEW)" />
-            <marker date="1526423994152" expanded="true" signature="9531:9592" ph=" SELECT statement (REVIEW)" />
-            <marker date="1526423994152" expanded="true" signature="10239:10273" ph=" SELECT statement (REVIEW)" />
-            <marker date="1526423994152" expanded="true" signature="10778:10811" ph=" DELETE statement" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/movies.hbs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1247,6 +1218,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DbFacade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="773">
+          <caret line="391" column="0" lean-forward="true" selection-start-line="391" selection-start-column="0" selection-end-line="391" selection-end-column="0" />
+          <folding>
+            <marker date="1526423994152" expanded="true" signature="1741:1833" ph=" SELECT statement" />
+            <marker date="1526423994152" expanded="true" signature="2594:2637" ph=" INSERT statement" />
+            <marker date="1526423994152" expanded="true" signature="3430:3465" ph=" INSERT statement (ADMINISTRATOR)" />
+            <marker date="1526423994152" expanded="true" signature="4131:4159" ph=" INSERT statement (CRITIC)" />
+            <marker date="1526423994152" expanded="true" signature="4807:4826" ph=" INSERT statement" />
+            <marker date="1526423994152" expanded="true" signature="4807:4884" ph=" INSERT statement" />
+            <marker date="1526423994152" expanded="true" signature="5872:5910" ph=" DELETE statement" />
+            <marker date="1526423994152" expanded="true" signature="6555:6664" ph=" SELECT statement" />
+            <marker date="1526423994152" expanded="true" signature="7735:7791" ph=" INSERT statement (REVIEW)" />
+            <marker date="1526423994152" expanded="true" signature="8759:8837" ph=" SELECT statement (REVIEW)" />
+            <marker date="1526423994152" expanded="true" signature="9531:9592" ph=" SELECT statement (REVIEW)" />
+            <marker date="1526423994152" expanded="true" signature="10239:10273" ph=" SELECT statement (REVIEW)" />
+            <marker date="1526423994152" expanded="true" signature="10778:10811" ph=" DELETE statement" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/addCommentSuccess.hbs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="63">
@@ -1257,16 +1250,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="31" column="65" lean-forward="false" selection-start-line="31" selection-start-column="65" selection-end-line="31" selection-end-column="65" />
+        <state relative-caret-position="357">
+          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ExampleController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="316" column="5" lean-forward="true" selection-start-line="316" selection-start-column="5" selection-end-line="316" selection-end-column="5" />
+        <state relative-caret-position="275">
+          <caret line="303" column="0" lean-forward="true" selection-start-line="303" selection-start-column="0" selection-end-line="303" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#799#800#0" expanded="true" />

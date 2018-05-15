@@ -298,8 +298,7 @@ public class ExampleController {
         String comment = req.queryParams("comment");
         String uname = req.session().attribute("username");
         String review_id = req.queryParams("review_id");
-        System.out.println("REVIEW ID");
-        System.out.println(review_id);
+
 
         try (DbFacade db = new DbFacade()) {
 
@@ -317,6 +316,6 @@ public class ExampleController {
     }
 
     public Object addCommentSuccess(Request req, Response resp) {
-        return Main.renderTemplate(null, "addCommentSuccess");
+        return Main.renderTemplate(null, "addCommentSuccess.hbs");
     }
 }
