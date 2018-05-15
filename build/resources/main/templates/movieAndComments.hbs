@@ -8,6 +8,7 @@
         <th>Movie Name</th>
         <th>Rating</th>
         <th>Critic's Username</th>
+        <th>Review_id</th>
     </tr>
     {{#movies}}
         <tr>
@@ -15,6 +16,7 @@
             <th>{{movie}} </th>
             <th>{{rating}}</th>
             <th>{{critic}}</th>
+            <th>{{review_id}}</th>
         </tr>
 
     {{/movies}}
@@ -36,5 +38,14 @@
         </tr>
     {{/comments}}
 </table>
+
+<h1>Add a comment: </h1>
+<form method="post" action="addComment">
+    <p><label>Enter your comment:</label><input type="text" name="comment"> </p>
+    <p><label>Enter the review_id:</label><input type="text" name="review_id"> </p>
+    <p><button type="submit">Submit</button></p>
+</form>
+
+
 
 {{footer}}

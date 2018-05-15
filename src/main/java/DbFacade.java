@@ -168,19 +168,22 @@ public class DbFacade implements AutoCloseable {
 	 * @param content The comment to add.
 	 * @return the row containing the added comment.
 	 */
-	public ResultSet addComment(String content) {
+	public ResultSet addComment(String content, String user, String review_id) {
 		ResultSet rset = null;
 		String sql = null;
 
 		try {
 			// create a Statement and an SQL string for the statement
 
-			sql = "INSERT INTO comment VALUES(comment_id, ?, false, review, post_date, user)";
+			sql = "INSERT INTO comment(content, author, reported, review) VALUES(?, ?, false, ?)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
 			pstmt.clearParameters();
-			pstmt.setString(1, content); // set the 1 parameter
-
+			pstmt.setString(1, content); // set the actual content of the comment
+			pstmt.setString(2, user); // set the author of the comment, somehow get the logged in user's username
+			//pstmt.setBoolean(3, false); // set reported to false
+            //int reviewId = Integer.parseInt(review_id);
+			pstmt.setString(3, review_id); // set review equal to the review_id of the review the comment is on
 			rset = pstmt.executeQuery(); // should be executeUpdate??
 		} catch (SQLException e) {
 			System.out.println("addComment failed: " + e.getMessage());
@@ -299,7 +302,7 @@ public class DbFacade implements AutoCloseable {
 		try {
 			// create a Statement and an SQL string for the statement
 
-			sql = "SELECT post_date, movie, rating, critic FROM review WHERE movie = ?";
+			sql = "SELECT post_date, movie, rating, critic, review_id FROM review WHERE movie = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
 			pstmt.clearParameters();

@@ -28,6 +28,8 @@ public class Main {
         get("/movieReviews", controller::getMovieReviews);
         post("/user/searchMovie", controller::searchMovie);
         post("/user/moviesAndComments", controller::getComments);
+        post("/user/addComment", controller::addComment);
+        get("/addCommentSuccess", controller::addCommentSuccess);
 
         /*
         post("/admin/grantAdmin", controller::grantAdmin);

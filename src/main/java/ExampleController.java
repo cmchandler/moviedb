@@ -264,6 +264,7 @@ public class ExampleController {
                 row.put("movie", rset.getString(2));
                 row.put("rating", rset.getString(3));
                 row.put("critic", rset.getString(4));
+                row.put("review_id", rset.getString(5));
                 movies.add(row);
             }
 
@@ -291,5 +292,31 @@ public class ExampleController {
             resp.status(500);
             return "";
         }
+    }
+
+    public Object addComment(Request req, Response resp) {
+        String comment = req.queryParams("comment");
+        String uname = req.session().attribute("username");
+        String review_id = req.queryParams("review_id");
+        System.out.println("REVIEW ID");
+        System.out.println(review_id);
+
+        try (DbFacade db = new DbFacade()) {
+
+            ResultSet rset = db.addComment(comment, uname, review_id);
+
+
+            return Main.renderTemplate(null, "addCommentSuccess.hbs");
+
+        } catch (SQLException e) {
+            System.err.println("Error in addComment: " + e.getMessage());
+
+            resp.status(500);
+            return "";
+        }
+    }
+
+    public Object addCommentSuccess(Request req, Response resp) {
+        return Main.renderTemplate(null, "addCommentSuccess");
     }
 }
