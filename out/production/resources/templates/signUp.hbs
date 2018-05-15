@@ -1,0 +1,16 @@
+{{> header.hbs }}
+
+<h2>Sign up if you don't have an account yet:</h2>
+
+{{#errorMsg}}
+    <p style="font-weight: bold; color: red;">{{errorMsg}}</p>
+{{/errorMsg}}
+
+<form method="post" action="postSignUp">
+    <p><label>Email:</label><input type="text" name="email"> </p>
+    <p><label>Username:</label><input type="text" name="uname"> </p>
+    <p><label>Password:</label><input type="password" name="password"></p>
+    <p><button type="submit">Sign Up</button></p>
+</form>
+
+{{> footer.hbs }}

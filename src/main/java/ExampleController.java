@@ -108,14 +108,14 @@ public class ExampleController {
 
     public void adminBefore(Request req, Response resp) {
         String uname = req.session().attribute("username");
-        if( uname == null || !uname.equals("admin")) { // CHANGE THIS TO HAVE ALL ADMINS
+        if( uname == null || !uname.equals("admin")) { // CHANGE THIS TO CHECK FOR ALL ADMINS
             halt(401, "Access denied");
         }
     }
 
     public void criticBefore(Request req, Response resp) {
         String uname = req.session().attribute("username");
-        if( uname == null || !uname.equals("critic") || !uname.equals("admin")) { // CHANGE THIS TO HAVE ALL CRITICS AND ADMINS
+        if( uname == null || !uname.equals("critic")) { // CHANGE THIS TO CHECK FOR ALL CRITICS AND ADMINS
             halt(401, "Access denied");
         }
     }
@@ -247,7 +247,49 @@ public class ExampleController {
             resp.status(500);
             return "";
         }
+    }
 
+    public Object getComments(Request req, Response resp) {
+        String movie = req.queryParams("movie");
 
+        try (DbFacade db = new DbFacade()) {
+            Map<String, Object> templateData = new HashMap<>();
+            ResultSet rset = db.listMovieReviews(movie);
+
+            ArrayList<Map<String, String>> movies = new ArrayList<>();
+
+            while (rset.next()) {
+                Map<String, String> row = new HashMap<>();
+                row.put("post_date", rset.getString(1));
+                row.put("movie", rset.getString(2));
+                row.put("rating", rset.getString(3));
+                row.put("critic", rset.getString(4));
+                movies.add(row);
+            }
+
+            templateData.put("movies", movies);
+
+            rset = db.getComments(movie);
+
+            ArrayList<Map<String, String>> comments = new ArrayList<>();
+
+            while (rset.next()) {
+                Map<String, String> row = new HashMap<>();
+                row.put("comment_id", rset.getString(1));
+                row.put("author", rset.getString(2));
+                row.put("content", rset.getString(3));
+                row.put("post_date", rset.getString(4));
+                comments.add(row);
+            }
+            templateData.put("comments", comments);
+
+            return Main.renderTemplate(templateData, "movieAndComments.hbs");
+
+        } catch (SQLException e) {
+            System.err.println("Error in getComments: " + e.getMessage());
+
+            resp.status(500);
+            return "";
+        }
     }
 }

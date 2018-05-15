@@ -27,12 +27,14 @@ public class Main {
         get("/movies", controller::getMovies);
         get("/movieReviews", controller::getMovieReviews);
         post("/user/searchMovie", controller::searchMovie);
+        post("/user/moviesAndComments", controller::getComments);
 
+        /*
         post("/admin/grantAdmin", controller::grantAdmin);
         post("/admin/deleteAccount", controller::deleteAccount);
         post("/admin/deleteComment", controller::deleteComment);
         post("/admin/grantCritic", controller::grantCritic);
-
+*/
         Spark.before("/user/*", controller::userBefore);
         Spark.before("/admin/*", controller::adminBefore);
         Spark.before("/critic/*", controller::criticBefore);

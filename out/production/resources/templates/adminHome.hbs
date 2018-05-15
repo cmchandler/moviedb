@@ -1,0 +1,32 @@
+{{> header.hbs }}
+
+<h1>Administrator Menu</h1>
+
+<h3>Grant Administrator</h3>
+<form method="post" action="/admin/grantAdmin">
+    <p><label>Username:</label><input type="text" name="uname">
+        <button type="submit">Submit</button></p>
+</form>
+
+<h3>Grant Critic</h3>
+<form method="post" action="/admin/grantCritic">
+    <p><label>Username:</label><input type="text" name="uname">
+        <button type="submit">Submit</button></p>
+</form>
+
+<h3>Delete account</h3>
+<form method="post" action="/admin/deleteAccount">
+    <p><label>Username:</label><input type="text" name="uname">
+        <button type="submit">Submit</button></p>
+</form>
+
+<h3>Delete comment</h3>
+<form method="post" action="/admin/deleteComment">
+    <p><label>Post ID:</label><input type="text" name="postid">
+        <button type="submit">Submit</button></p>
+</form>
+
+
+
+
+{{> footer.hbs }}

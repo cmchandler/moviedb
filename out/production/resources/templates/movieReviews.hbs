@@ -1,0 +1,23 @@
+{{header}}
+
+<h1>List of all movie reviews: </h1>
+
+<table>
+    <tr>
+        <th>Time Stamp</th>
+        <th>Movie Name</th>
+        <th>Rating</th>
+        <th>Critic's Username</th>
+    </tr>
+    {{#movies}}
+        <tr>
+            <th>{{post_date}}</th>
+            <th>{{movie}} </th>
+            <th>{{rating}}</th>
+            <th>{{critic}}</th>
+        </tr>
+
+    {{/movies}}
+</table>
+
+{{footer}}

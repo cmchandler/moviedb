@@ -216,6 +216,31 @@ public class DbFacade implements AutoCloseable {
 	}
 
 	/**
+	 * Gets comments related to a movie
+	 * @param movie is the movie to find comments for
+	 * @return all comments related to this movie.
+	 */
+	public ResultSet getComments(String movie) {
+		ResultSet rset = null;
+		String sql = null;
+
+		try {
+			// create a Statement and an SQL string for the statement
+			sql ="SELECT comment_id, author, content, comment.post_date FROM comment, review WHERE movie=? AND review=review_id";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			pstmt.clearParameters();
+			pstmt.setString(1, movie);
+
+			rset = pstmt.executeQuery();
+
+		} catch(SQLException e) {
+			System.out.println("getComments failed: " + e.getMessage());
+		}
+		return rset;
+	}
+
+	/**
 	 * Adds a new review to the database, taking information from user.
 	 *
 	 * Image is currently in database as a BLOB, but the intent is to

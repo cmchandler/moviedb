@@ -1,0 +1,40 @@
+{{header}}
+
+<h1>Movie and comments: </h1>
+
+<table>
+    <tr>
+        <th>Time Stamp</th>
+        <th>Movie Name</th>
+        <th>Rating</th>
+        <th>Critic's Username</th>
+    </tr>
+    {{#movies}}
+        <tr>
+            <th>{{post_date}}</th>
+            <th>{{movie}} </th>
+            <th>{{rating}}</th>
+            <th>{{critic}}</th>
+        </tr>
+
+    {{/movies}}
+</table>
+
+<table>
+    <tr>
+        <th>Comment_id</th>
+        <th>Author</th>
+        <th>Comment</th>
+        <th>Post Date</th>
+    </tr>
+    {{#comments}}
+        <tr>
+            <th>{{comment_id}}</th>
+            <th>{{author}}</th>
+            <th>{{content}}</th>
+            <th>{{post_date}}</th>
+        </tr>
+    {{/comments}}
+</table>
+
+{{footer}}
