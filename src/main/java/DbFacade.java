@@ -331,6 +331,7 @@ public class DbFacade implements AutoCloseable {
 
             pstmt.clearParameters();
 
+
             rset = pstmt.executeQuery();
 
         } catch (SQLException e) {
@@ -350,7 +351,8 @@ public class DbFacade implements AutoCloseable {
 		try {
 			// create a Statement and an SQL string for the statement
             Statement stmt = conn.createStatement();
-			sql = "SELECT movie FROM review WHERE 1=1";
+			sql = "SELECT post_date, movie, rating, critic FROM review WHERE review_id=?";
+
 			rset = stmt.executeQuery(sql);
 
 		} catch (SQLException e) {
@@ -359,6 +361,34 @@ public class DbFacade implements AutoCloseable {
 
 		return rset;
 	}
+
+    /**
+     * Gets a ResultSet containing all of the movies in the database
+     * @return ResultSet containing all of the movies in the database
+     */
+    public ResultSet getReviewByID(String reviewID) {
+        ResultSet rset = null;
+        String sql;
+        try {
+            // create a Statement and an SQL string for the statement
+            Statement stmt = conn.createStatement();
+            sql = sql = "SELECT post_date, movie, rating, critic FROM review WHERE review_id=?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.clearParameters();
+
+            pstmt.setString(1, reviewID);
+
+
+            rset = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println("allMovies failed: " + e.getMessage());
+        }
+
+        return rset;
+    }
 
     /**
      * Deletes a user with given username from the database.

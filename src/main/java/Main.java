@@ -28,7 +28,7 @@ public class Main {
         get("/movieReviews", controller::getMovieReviews);
         post("/user/searchMovie", controller::searchMovie);
         post("/user/moviesAndComments", controller::getComments);
-
+        get("/review/:reviewid", controller::getReviewByID);
 
         post("/admin/grantAdmin", controller::grantAdmin);
         post("/admin/deleteAccount", controller::deleteAccount);

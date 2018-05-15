@@ -315,6 +315,33 @@ public class ExampleController {
         }
     }
 
+    public Object getReviewByID(Request req, Response resp) {
+        String reviewID = req.params(":reviewid");
+
+        try (DbFacade db = new DbFacade()) {
+            Map<String, Object> templateData = new HashMap<>();
+            ResultSet rset = db.getReviewByID(reviewID);
+
+            while( rset.next() ){
+
+                templateData.put("post_date", rset.getString(1));
+                templateData.put("movie", rset.getString(2));
+                templateData.put("rating", rset.getString(3));
+                templateData.put("critic", rset.getString(4));
+            }
+
+
+            return Main.renderTemplate(templateData, "movie-display.hbs");
+
+        } catch (SQLException e) {
+            System.err.println("Error in searchMovie: " + e.getMessage());
+
+            resp.status(500);
+            return "";
+        }
+
+    }
+
     public Object getComments(Request req, Response resp) {
         String movie = req.queryParams("movie");
 
@@ -358,4 +385,5 @@ public class ExampleController {
             return "";
         }
     }
+
 }
